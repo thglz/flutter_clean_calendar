@@ -47,8 +47,10 @@ class Range {
 ///     top bar well get suppressed. Default is [false].
 /// [hideBottomBar] at the moment has no function. Default is [false].
 /// [events] are of type [Map<DateTime, List<CleanCalendarEvent>>]. This data structure containes the events to display
-/// [selctedColor] this is the color, applied to the circle on the selcted day
+/// [selectedColor] this is the color, applied to the circle on the selected day
 /// [todayColor] this is the color of the date of today
+/// [dayOfCurrentMonthColor] this is the color of the days of current month
+/// [dayOfOtherMonthColor] this is the color of the days of previous and next month
 /// [todayButtonText] is a [String]. With this property you can set the caption of the today icon (button to navigate to today).
 ///     If left empty, the calendar will use the string "Today".
 /// [eventColor] lets you optionally specify the color of the event (dot). If the [CleanCaendarEvents] property color is not set, the
@@ -80,6 +82,8 @@ class Calendar extends StatefulWidget {
   final Map<DateTime, List<CleanCalendarEvent>>? events;
   final Color? selectedColor;
   final Color? todayColor;
+  final Color? dayOfCurrentMonthColor;
+  final Color? dayOfOtherMonthColor;
   final String todayButtonText;
   final Color? eventColor;
   final Color? eventDoneColor;
@@ -110,6 +114,8 @@ class Calendar extends StatefulWidget {
     this.hideArrows: false,
     this.selectedColor,
     this.todayColor,
+    this.dayOfCurrentMonthColor,
+    this.dayOfOtherMonthColor,
     this.todayButtonText: 'Today',
     this.eventColor,
     this.eventDoneColor,
@@ -243,6 +249,8 @@ class _CalendarState extends State<Calendar> {
           CalendarTile(
             selectedColor: widget.selectedColor,
             todayColor: widget.todayColor,
+            dayColor: widget.dayOfCurrentMonthColor,
+            otherDayColor: widget.dayOfOtherMonthColor,
             eventColor: widget.eventColor,
             eventDoneColor: widget.eventDoneColor,
             events: widget.events![day],
@@ -283,6 +291,8 @@ class _CalendarState extends State<Calendar> {
             CalendarTile(
               selectedColor: widget.selectedColor,
               todayColor: widget.todayColor,
+              dayColor: widget.dayOfCurrentMonthColor,
+              otherDayColor: widget.dayOfOtherMonthColor,
               eventColor: widget.eventColor,
               eventDoneColor: widget.eventDoneColor,
               events: widget.events![day],
@@ -296,6 +306,8 @@ class _CalendarState extends State<Calendar> {
             CalendarTile(
                 selectedColor: widget.selectedColor,
                 todayColor: widget.todayColor,
+                dayColor: widget.dayOfCurrentMonthColor,
+                otherDayColor: widget.dayOfOtherMonthColor,
                 eventColor: widget.eventColor,
                 eventDoneColor: widget.eventDoneColor,
                 events: widget.events![day],
