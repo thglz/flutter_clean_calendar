@@ -28,6 +28,8 @@ class Range {
 ///
 /// [onDateSelected] is of type [ValueChanged<DateTime>] and it containes the callback function
 ///     extecuted when tapping a date
+/// [onDateLongPress] is of type [ValueChanged<DateTime>] and it contains the callback function
+///     extecuted when long press a date
 /// [onMonthChanged] is of type [ValueChanged<DateTime>] and it containes the callback function
 ///     extecuted when changing to another month
 /// [onExpandStateChanged] is of type [ValueChanged<bool>] and it contains a callback function
@@ -70,6 +72,7 @@ class Range {
 /// [expandableDateFormat] defines the formatting of the date in the bottom bar
 class Calendar extends StatefulWidget {
   final ValueChanged<DateTime>? onDateSelected;
+  final ValueChanged<DateTime>? onDateLongPress;
   final ValueChanged<DateTime>? onMonthChanged;
   final ValueChanged<bool>? onExpandStateChanged;
   final ValueChanged? onRangeSelected;
@@ -102,6 +105,7 @@ class Calendar extends StatefulWidget {
   Calendar({
     this.onMonthChanged,
     this.onDateSelected,
+    this.onDateLongPress,
     this.onRangeSelected,
     this.onExpandStateChanged,
     this.onEventSelected,
@@ -299,6 +303,7 @@ class _CalendarState extends State<Calendar> {
               child: widget.dayBuilder!(context, day),
               date: day,
               onDateSelected: () => handleSelectedDateAndUserCallback(day),
+              onDateLongPress: widget.onDateLongPress != null ? () => widget.onDateLongPress!(day) : null,
             ),
           );
         } else {
@@ -312,6 +317,7 @@ class _CalendarState extends State<Calendar> {
                 eventDoneColor: widget.eventDoneColor,
                 events: widget.events![day],
                 onDateSelected: () => handleSelectedDateAndUserCallback(day),
+              onDateLongPress: widget.onDateLongPress != null ? () => widget.onDateLongPress!(day) : null,
                 date: day,
                 dateStyles: configureDateStyle(monthStarted, monthEnded),
                 isSelected: Utils.isSameDay(selectedDate, day),

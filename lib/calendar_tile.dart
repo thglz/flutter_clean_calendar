@@ -10,6 +10,8 @@ import "package:intl/intl.dart";
 ///
 /// [onDateSelected] is the callback function that gets invoked on tapping a date in the
 /// calendar view. It has the type [VoidCallback]
+/// [onDateLongPress] is the callback function that gets invoked on long press a date in the
+/// calendar view. It has the type [VoidCallback]
 /// [date] containes the current date to be rendered as [DateTime] type
 /// [dayOfWeek] Contains the name of the weekday to be shown in the header row
 /// [isDayOfWeek] is a [bool], that gets used to deiced, if the tile shoulöd display a weekday or a date
@@ -27,6 +29,7 @@ import "package:intl/intl.dart";
 /// [eventDoneColor] a [Color] object für displaying "done" events (events in the past)
 class CalendarTile extends StatelessWidget {
   final VoidCallback? onDateSelected;
+  final VoidCallback? onDateLongPress;
   final DateTime? date;
   final String? dayOfWeek;
   final bool isDayOfWeek;
@@ -45,6 +48,7 @@ class CalendarTile extends StatelessWidget {
 
   CalendarTile({
     this.onDateSelected,
+    this.onDateLongPress,
     this.date,
     this.child,
     this.dateStyles,
@@ -85,6 +89,7 @@ class CalendarTile extends StatelessWidget {
       int eventCount = 0;
       return InkWell(
         onTap: onDateSelected, // react on tapping
+        onLongPress: onDateLongPress,
         child: Padding(
           padding: const EdgeInsets.all(1.0),
           child: Container(
@@ -167,6 +172,7 @@ class CalendarTile extends StatelessWidget {
       return InkWell(
         child: child,
         onTap: onDateSelected,
+        onLongPress: onDateLongPress,
       );
     }
     return Container(
